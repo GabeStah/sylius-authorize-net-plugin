@@ -1,0 +1,28 @@
+{
+  "name": "solarix/sylius-authorize-net-plugin",
+  "authors": [
+    {
+      "name": "Gabe Wyatt",
+      "email": "gabe@solarixdigital.com"
+    }
+  ],
+  "type": "sylius-plugin",
+  "description": "Authorize.net plugin for Sylius.",
+  "version": "1.2.14",
+  "require": {
+    "authorizenet/authorizenet": "^1.9.8",
+    "php": "^7.3",
+    "sylius/sylius": "~1.8.0",
+    "symfony/dotenv": "^4.4",
+    "ext-json": "*"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Solarix\\SyliusAuthorizeNetPlugin\\": "src/"
+    }
+  },
+  "prefer-stable": true
+}

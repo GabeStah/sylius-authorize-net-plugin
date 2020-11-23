@@ -1,0 +1,19 @@
+solarix_sylius_authorize_net_plugin:
+  payum_gateway_factory:
+    authorize_net: Authorize.net
+  form:
+    gateway_configuration:
+      authorize_net:
+        login_id: API ID
+        gateway_id: Gateway ID
+        transaction_key: Transaction Key
+        auto_capture: Auto Capture
+        yes: Yes
+        no: No
+      error:
+        login_id:
+          not_blank: API ID should not be empty
+        gateway_id:
+          not_blank: Gateway ID should not be empty
+        transaction_key:
+          not_blank: Transaction Key should not be empty

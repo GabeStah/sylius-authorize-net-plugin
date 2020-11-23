@@ -1,0 +1,36 @@
+#imports:
+#  - { resource: 'services/providers.yaml' }
+
+services:
+  solarix.sylius_authorize_net_plugin.form.type.gateway_configuration.authorize_net:
+    class: Solarix\SyliusAuthorizeNetPlugin\Form\Type\AuthorizeNetGatewayConfigurationType
+    tags:
+      - { name: sylius.gateway_configuration_type, type: authorize_net, label: solarix_sylius_authorize_net_plugin.payum_gateway_factory.authorize_net }
+      - { name: form.type }
+
+  solarix.sylius_authorize_net_plugin.action.capture:
+    public: true
+    class: Solarix\SyliusAuthorizeNetPlugin\Payum\Action\CaptureAction
+    arguments: [ '@sylius.http_client' ]
+    tags:
+      - { name: payum.action, factory: authorize_net, alias: payum.action.capture }
+
+  solarix.sylius_authorize_net_plugin.action.convert_payment:
+    public: true
+    class: Solarix\SyliusAuthorizeNetPlugin\Payum\Action\ConvertPaymentAction
+    #    arguments:
+    #      $detailsProvider: '@solarix.sylius_payum_stripe.provider.details'
+    tags:
+      - { name: payum.action, factory: authorize_net, alias: payum.action.convert_payment }
+
+  solarix.sylius_authorize_net_plugin.action.status:
+    public: true
+    class: Solarix\SyliusAuthorizeNetPlugin\Payum\Action\StatusAction
+    tags:
+      - { name: payum.action, factory: authorize_net, alias: payum.action.status }
+
+  solarix.sylius_authorize_net_plugin.authorize_net:
+    class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+    arguments: [ Solarix\SyliusAuthorizeNetPlugin\Payum\AuthorizeNetPaymentGatewayFactory ]
+    tags:
+      - { name: payum.gateway_factory_builder, factory: authorize_net }
