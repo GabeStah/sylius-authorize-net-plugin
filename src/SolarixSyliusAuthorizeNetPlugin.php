@@ -4,7 +4,6 @@ namespace Solarix\SyliusAuthorizeNetPlugin;
 
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-
 use Solarix\SyliusAuthorizeNetPlugin\DependencyInjection\Compiler\PayumGatewayConfigOverride;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

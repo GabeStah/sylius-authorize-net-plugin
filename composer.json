@@ -8,7 +8,7 @@
   ],
   "type": "sylius-plugin",
   "description": "Authorize.net plugin for Sylius.",
-  "version": "1.2.14",
+  "version": "1.3.25",
   "require": {
     "authorizenet/authorizenet": "^1.9.8",
     "php": "^7.3",

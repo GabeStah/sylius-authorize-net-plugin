@@ -1,0 +1,31 @@
+{% extends '@SyliusShop/Checkout/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+  <div>
+    <h1 class="ui header">
+      <i class="circular cart icon"></i>
+      <div class="content">
+        {{ 'solarix_sylius_authorize_net_plugin.form.obtain_credit_card.title'|trans }}
+      </div>
+    </h1>
+
+    {% include '@SyliusShop/_flashes.html.twig' %}
+
+    {% block payum_body %}
+      <p>{{ 'solarix_sylius_authorize_net_plugin.form.obtain_credit_card.description'|trans }}</p>
+      <form method="POST" action="{{ actionUrl }}">
+        {{ form_row(form) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Submit"/>
+      </form>
+    {% endblock %}
+  </div>
+{% endblock %}
+
+

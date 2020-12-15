@@ -19,24 +19,13 @@ class AuthorizeNetGatewayConfigurationType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options): void
   {
     $builder
-      ->add('login_id', TextType::class, [
+      ->add('api_id', TextType::class, [
         'label' =>
-          'solarix_sylius_authorize_net_plugin.form.gateway_configuration.authorize_net.login_id',
+          'solarix_sylius_authorize_net_plugin.form.gateway_configuration.authorize_net.api_id',
         'constraints' => [
           new NotBlank([
             'message' =>
-              'solarix_sylius_authorize_net_plugin.form.gateway_configuration.error.login_id.not_blank',
-            'groups' => 'sylius',
-          ]),
-        ],
-      ])
-      ->add('gateway_id', TextType::class, [
-        'label' =>
-          'solarix_sylius_authorize_net_plugin.form.gateway_configuration.authorize_net.gateway_id',
-        'constraints' => [
-          new NotBlank([
-            'message' =>
-              'solarix_sylius_authorize_net_plugin.form.gateway_configuration.error.gateway_id.not_blank',
+              'solarix_sylius_authorize_net_plugin.form.gateway_configuration.error.api_id.not_blank',
             'groups' => 'sylius',
           ]),
         ],
@@ -61,7 +50,7 @@ class AuthorizeNetGatewayConfigurationType extends AbstractType
         ],
       ])
       ->add('use_authorize', HiddenType::class, [
-        'data' => true,
+        'data' => false,
       ]);
   }
 }

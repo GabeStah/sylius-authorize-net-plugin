@@ -4,10 +4,11 @@ namespace Solarix\SyliusAuthorizeNetPlugin\Payum\Action;
 
 use App\Entity\Payment\Payment;
 use Payum\Core\Action\ActionInterface;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\GetStatusInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
+use Solarix\SyliusAuthorizeNetPlugin\Payum\Response\AuthorizeNetResponse;
 
 /**
  * Class StatusAction
@@ -21,21 +22,25 @@ final class StatusAction implements ActionInterface
   {
     RequestNotSupportedException::assertSupports($this, $request);
 
+    $model = ArrayObject::ensureArrayObject($request->getModel());
+
     /** @var SyliusPaymentInterface $payment */
     $payment = $request->getFirstModel();
 
     $details = $payment->getDetails();
 
-    if (200 === $details['status']) {
-      $request->markCaptured();
-
-      return;
-    }
-
-    if (400 === $details['status']) {
-      $request->markFailed();
-
-      return;
+    switch ($details['status']) {
+      case AuthorizeNetResponse::STATUS_TYPE_SUCCESS:
+        $request->markCaptured();
+        return;
+      case AuthorizeNetResponse::STATUS_TYPE_ERROR:
+        $request->markFailed();
+        return;
+      case AuthorizeNetResponse::STATUS_TYPE_PENDING:
+        $request->markPending();
+        return;
+      default:
+      // noop
     }
   }
 

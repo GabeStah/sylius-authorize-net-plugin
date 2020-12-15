@@ -9,7 +9,6 @@ use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\Refund;
 
-//use Payum\AuthorizeNet\Aim\AuthorizeNetAimGatewayFactory;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;

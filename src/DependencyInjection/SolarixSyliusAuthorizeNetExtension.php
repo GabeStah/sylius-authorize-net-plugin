@@ -21,15 +21,6 @@ class SolarixSyliusAuthorizeNetExtension extends Extension
       $configs
     );
 
-    $container->setParameter(
-      'solarix_sylius_authorize_net_plugin.line_item_image.imagine_filter',
-      $configs['line_item_image']['imagine_filter']
-    );
-    $container->setParameter(
-      'solarix_sylius_authorize_net_plugin.line_item_image.fallback_image',
-      $configs['line_item_image']['fallback_image']
-    );
-
     $loader = new YamlFileLoader(
       $container,
       new FileLocator(dirname(__DIR__) . '/Resources/config')

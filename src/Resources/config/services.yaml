@@ -1,6 +1,3 @@
-#imports:
-#  - { resource: 'services/providers.yaml' }
-
 services:
   solarix.sylius_authorize_net_plugin.form.type.gateway_configuration.authorize_net:
     class: Solarix\SyliusAuthorizeNetPlugin\Form\Type\AuthorizeNetGatewayConfigurationType
@@ -18,8 +15,6 @@ services:
   solarix.sylius_authorize_net_plugin.action.convert_payment:
     public: true
     class: Solarix\SyliusAuthorizeNetPlugin\Payum\Action\ConvertPaymentAction
-    #    arguments:
-    #      $detailsProvider: '@solarix.sylius_payum_stripe.provider.details'
     tags:
       - { name: payum.action, factory: authorize_net, alias: payum.action.convert_payment }
 
