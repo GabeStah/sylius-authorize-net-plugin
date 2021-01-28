@@ -258,7 +258,7 @@ final class AuthorizeNetApi
     // Create a TransactionRequestType object and add the previous objects to it
     $transactionRequestType = new AnetAPI\TransactionRequestType();
     $transactionRequestType->setTransactionType('authCaptureTransaction');
-    $transactionRequestType->setAmount($this->getPayment()->getAmount());
+    $transactionRequestType->setAmount($this->getPayment()->getAmount() / 100);
     $transactionRequestType->setOrder($order);
     $transactionRequestType->setPayment($paymentType);
     $transactionRequestType->setBillTo($customerAddress);
