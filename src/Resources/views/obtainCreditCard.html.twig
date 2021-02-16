@@ -1,3 +1,10 @@
+{% set steps_count = 4 %}
+{% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'active', 'complete': 'completed'} %}
+{% set order_requires_shipping = true %}
+{% set order_requires_payment = false %}
+
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
 {% extends '@SyliusShop/Checkout/layout.html.twig' %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
@@ -5,6 +12,49 @@
 {% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
+  <div class="steps mb-5 {{ steps_count }}">
+    <a class="steps-item {{ steps['address'] }}" {{ sylius_test_html_attribute('step-address') }}>
+      <div class="steps-icon">{{ icons.address() }}</div>
+      <div class="steps-content">
+        <h6 class="steps-title">{{ 'sylius.ui.address'|trans }}</h6>
+        <div class="steps-text">{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</div>
+      </div>
+    </a>
+    {% if order_requires_shipping %}
+      <a class="steps-item {{ steps['select_shipping'] }}" {{ sylius_test_html_attribute('step-shipping') }}>
+        <div class="steps-icon">{{ icons.transport() }}</div>
+        <div class="steps-content">
+          <h6 class="steps-title">{{ 'sylius.ui.shipping'|trans }}</h6>
+          <div class="steps-text">{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</div>
+        </div>
+      </a>
+    {% endif %}
+    {% if order_requires_payment %}
+      <a class="steps-item {{ steps['select_payment'] }}" {{ sylius_test_html_attribute('step-payment') }}>
+        <div class="steps-icon">{{ icons.creditCard() }}</div>
+        <div class="steps-content">
+          <h6 class="steps-title">{{ 'sylius.ui.payment'|trans }}</h6>
+          <div class="steps-text">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
+        </div>
+      </a>
+    {% endif %}
+    <a class="steps-item {{ steps['complete'] }}">
+      <div class="steps-icon">{{ icons.flag() }}</div>
+      <div class="steps-content">
+        <h6 class="steps-title">{{ 'sylius.ui.complete'|trans }}</h6>
+        <div class="steps-text">{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</div>
+      </div>
+    </a>
+    <a class="steps-item {{ steps['select_payment'] }}"
+      {{ sylius_test_html_attribute('step-payment') }}>
+      <div class="steps-icon">{{ icons.creditCard() }}</div>
+      <div class="steps-content">
+        <h6 class="steps-title">{{ 'sylius.ui.payment'|trans }}</h6>
+        <div class="steps-text">{{ 'sylius.ui.make_payment'|trans }}</div>
+      </div>
+    </a>
+  </div>
+
   <div>
     <h1 class="ui header">
       <i class="circular cart icon"></i>
@@ -17,12 +67,12 @@
 
     {% block payum_body %}
       <p>{{ 'solarix_sylius_authorize_net_plugin.form.obtain_credit_card.description'|trans }}</p>
-      <form method="POST" action="{{ actionUrl }}">
+      <form method="POST" action="{{ actionUrl }}" class="my-2">
         {{ form_row(form) }}
 
         {{ form_rest(form) }}
 
-        <input type="submit" value="Submit"/>
+        <button type="submit" class="btn btn-primary" role="button" value="Submit">Submit</button>
       </form>
     {% endblock %}
   </div>
