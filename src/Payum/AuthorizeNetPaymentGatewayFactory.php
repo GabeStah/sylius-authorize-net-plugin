@@ -25,12 +25,31 @@ final class AuthorizeNetPaymentGatewayFactory extends GatewayFactory
 
     if (false == $config['payum.api']) {
       $config['payum.default_options'] = [
-        'api_id' => $_ENV['AUTHORIZE_NET_API_ID'] ?? '123',
-        'transaction_key' => $_ENV['AUTHORIZE_NET_TRANSACTION_KEY'] ?? '123',
-        'sandbox' => true,
+        'api_id' => $config['api_id'] ?? $_ENV['AUTHORIZE_NET_API_ID'],
+        'transaction_key' =>
+          $config['transaction_key'] ?? $_ENV['AUTHORIZE_NET_TRANSACTION_KEY'],
+        'sandbox' => $config['sandbox'] ?? $_ENV['AUTHORIZE_NET_SANDBOX'],
         'payum.template.obtain_credit_card' =>
           '@SolarixSyliusAuthorizeNetPlugin/obtainCreditCard.html.twig',
       ];
+      error_log(
+        'api_id: ' .
+          substr($config['api_id'], null, strlen($config['api_id']) - 3) .
+          PHP_EOL,
+        3,
+        $_SERVER['INIT_CWD'] . '/var/log/dev.log'
+      );
+      error_log(
+        'transaction_key: ' .
+          substr(
+            $config['transaction_key'],
+            null,
+            strlen($config['transaction_key']) - 3
+          ) .
+          PHP_EOL,
+        3,
+        $_SERVER['INIT_CWD'] . '/var/log/dev.log'
+      );
       $config->defaults($config['payum.default_options']);
       $config['payum.required_options'] = ['api_id', 'transaction_key'];
 
