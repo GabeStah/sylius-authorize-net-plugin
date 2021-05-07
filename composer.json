@@ -1,9 +1,9 @@
 {
-  "name": "solarix/sylius-authorize-net-plugin",
+  "name": "sylius-authorize-net-plugin",
   "authors": [
     {
       "name": "Gabe Wyatt",
-      "email": "gabe@solarixdigital.com"
+      "email": "gabe@gabewyatt.com"
     }
   ],
   "type": "sylius-plugin",

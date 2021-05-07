@@ -1,4 +1,4 @@
-# Solarix: SyliusAuthorizeNetPlugin
+# SyliusAuthorizeNetPlugin
 
 The SyliusAuthorizeNetPlugin adds [Authorize.net](https://www.authorize.net/) payment gateway support to the [Sylius](https://sylius.com/) platform.
 
